@@ -5,7 +5,7 @@
 FROM alpine:3.21 AS base
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache --update nodejs=18.18.2-r0
+RUN apk add --no-cache --update nodejs=20.12.1-r0
 
 WORKDIR /action
 
@@ -16,7 +16,7 @@ ENTRYPOINT [ "node" ]
 FROM base AS build
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache npm=9.6.6-r0
+RUN apk add --no-cache npm=10.2.5-r0
 
 # slience npm
 # hadolint ignore=DL3059

@@ -8,7 +8,7 @@ const lint = require('./lint.js')
 const messageProps = { title: 'commit-lint' }
 
 // exit early
-if (!['pull_request', 'push'].includes(github.context.eventName)) {
+if (!['pull_request', 'pull_request_target', 'push'].includes(github.context.eventName)) {
   core.warning(`action ran on unsupported event: ${github.context.eventName}`, messageProps)
   process.exit(0) // soft exit
 }
@@ -45,7 +45,7 @@ const commits = []
 
 async function main () {
   // handle Pul Requests
-  if (github.context.eventName === 'pull_request') {
+  if (['pull_request', 'pull_request_target'].includes(github.context.eventName)) {
     // fetch commits
     const { data } = await octokit.rest.pulls.listCommits({
       ...github.context.repo,
